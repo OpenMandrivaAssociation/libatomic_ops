@@ -4,14 +4,14 @@
 %define libname_devel %mklibname -d %{rawname}
 
 %define version 1.1
-%define release %mkrel 2
+%define release %mkrel 3
 
 Summary:   Multiplatform atomic memory operation library
 Name:      %{libname}
 Version:   %{version}
 Release:   %{release}
 License:   MIT/GPL
-Group:     System/Library
+Group:     System/Libraries
 Source:    lib%{rawname}-%{version}.tar.bz2
 Patch0:    00_x86_intrin.patch
 Patch1:    01_s390_include.patch
