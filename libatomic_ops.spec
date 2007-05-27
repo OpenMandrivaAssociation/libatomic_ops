@@ -18,6 +18,7 @@ Patch1:    01_s390_include.patch
 Patch2:    02_mips.patch
 #Patch3:    03_nodoc.patch
 Patch4:    04_m68k-rediff.patch
+Patch5:    libatomic_ops-1.2-ppc.patch
 URL:       http://www.hpl.hp.com/research/linux/atomic_ops/
 BuildRoot: %{_tmppath}/%{name}-buildroot
 
@@ -85,6 +86,7 @@ details.
 %patch2 -p1
 #patch3 -p1
 %patch4 -p1
+%patch5 -p1 -b .ppc
 
 %build
 autoreconf
