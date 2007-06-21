@@ -11,7 +11,7 @@ Name:      %{libname}
 Version:   %{version}
 Release:   %{release}
 License:   MIT/GPL
-Group:     System/Library
+Group:     System/Libraries
 Source:    lib%{rawname}-%{version}.tar.bz2
 Patch0:    00_x86_intrin.patch
 Patch1:    01_s390_include.patch
@@ -27,7 +27,7 @@ Multiplatform atomic memory operation library
 
 %package -n %{libname_devel}
 Summary:   Multiplatform atomic memory operation library
-Group:     System/Library
+Group:     System/Libraries
 # Cross-arch provides
 Provides:  %{libname}-devel = %{version}
 
