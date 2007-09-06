@@ -3,8 +3,8 @@
 %define libname lib%{rawname}
 %define libname_devel %mklibname -d %{rawname}
 
-%define version 1.1
-%define release %mkrel 4
+%define version 1.2
+%define release %mkrel 1
 
 Summary:   Multiplatform atomic memory operation library
 Name:      %{libname}
@@ -12,11 +12,9 @@ Version:   %{version}
 Release:   %{release}
 License:   MIT/GPL
 Group:     System/Libraries
-Source:    lib%{rawname}-%{version}.tar.bz2
-Patch0:    00_x86_intrin.patch
+Source:    lib%{rawname}-%{version}.tar.gz
 Patch1:    01_s390_include.patch
 Patch2:    02_mips.patch
-#Patch3:    03_nodoc.patch
 Patch4:    04_m68k-rediff.patch
 Patch5:    libatomic_ops-1.2-ppc.patch
 URL:       http://www.hpl.hp.com/research/linux/atomic_ops/
@@ -81,10 +79,8 @@ details.
 
 %prep
 %setup -q -n %{libname}-%{version}
-%patch0 -p0
 %patch1 -p0
 %patch2 -p1
-#patch3 -p1
 %patch4 -p1
 %patch5 -p1 -b .ppc
 
