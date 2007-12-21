@@ -18,6 +18,7 @@ Patch2:    02_mips.patch
 Patch4:    04_m68k-rediff.patch
 Patch5:    libatomic_ops-1.2-ppc.patch
 URL:       http://www.hpl.hp.com/research/linux/atomic_ops/
+BuildRoot: %{_tmppath}/%{name}-buildroot
 
 %description
 Multiplatform atomic memory operation library
