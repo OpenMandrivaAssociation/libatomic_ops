@@ -15,6 +15,7 @@ Group:     System/Libraries
 Source:    lib%{rawname}-%{version}.tar.gz
 Patch1:    01_s390_include.patch
 Patch2:    02_mips.patch
+Patch3:	   libatomic_ops-1.2-installonce.patch
 Patch4:    04_m68k-rediff.patch
 Patch5:    libatomic_ops-1.2-ppc.patch
 URL:       http://www.hpl.hp.com/research/linux/atomic_ops/
@@ -81,6 +82,7 @@ details.
 %setup -q -n %{libname}-%{version}
 %patch1 -p0
 %patch2 -p1
+%patch3 -p1 -b .installonce
 %patch4 -p1
 %patch5 -p1 -b .ppc
 
