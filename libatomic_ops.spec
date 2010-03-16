@@ -4,7 +4,7 @@
 %define libname_devel %mklibname -d %{rawname}
 
 %define version 1.2
-%define release %mkrel 4
+%define release %mkrel 5
 
 Summary:   Multiplatform atomic memory operation library
 Name:      %{libname}
