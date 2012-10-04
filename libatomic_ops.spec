@@ -1,28 +1,26 @@
+#define snapshot_vendor  ivmai
+#define snapshot         81be636
+#define snapshot_version 7_2alpha6-128
+
 %define rawname atomic_ops
 # Can't use mklibname as the name should be the same on all arches
 %define libname lib%{rawname}
 %define libname_devel %mklibname -d %{rawname}
 
-%define version 1.2
-%define release %mkrel 7
+%define prever alpha2
 
-Summary:   Multiplatform atomic memory operation library
 Name:      %{libname}
-Version:   %{version}
-Release:   %{release}
+Version:   7.3
+Release:   %mkrel 0.%{prever}.1
+Summary:   Multiplatform atomic memory operation library
 License:   MIT/GPL
 Group:     System/Libraries
-Source:    lib%{rawname}-%{version}.tar.gz
-Patch1:    01_s390_include.patch
-Patch2:    02_mips.patch
-Patch3:    libatomic_ops-1.2-installonce.patch
-Patch4:    04_m68k-rediff.patch
-Patch5:    libatomic_ops-1.2-ppc.patch
+Source0:   http://www.hpl.hp.com/personal/Hans_Boehm/gc/gc_source/%{name}-%{version}%{prever}.tar.gz
 URL:       http://www.hpl.hp.com/research/linux/atomic_ops/
-BuildRoot: %{_tmppath}/%{name}-buildroot
 
 %description
 Multiplatform atomic memory operation library
+
 
 %package -n %{libname_devel}
 Summary:   Multiplatform atomic memory operation library
@@ -53,13 +51,25 @@ Boehm, "An almost non-blocking stack", also here) and a signal-handler-safe
 memory allocator based on it. See README_stack.txt and README_malloc.txt for
 details.
 
+
+%prep
+#setup -q -n % {snapshot_vendor}-% {name}-% {snapshot}
+%setup -q -n %{name}-%{version}%{prever}
+
+%build
+autoreconf -fi
+%configure2_5x --disable-static
+%make
+
+%install
+%makeinstall_std
+
 %files -n  %{libname_devel}
-%defattr(-,root,root)
 %{_includedir}/*.h
 %dir %{_includedir}/%{rawname}
 %{_includedir}/%{rawname}/*.h
 %dir %{_includedir}/%{rawname}/sysdeps
-%{_includedir}/%{rawname}/sysdeps/README
+#%{_includedir}/%{rawname}/sysdeps/README
 %{_includedir}/%{rawname}/sysdeps/*.h
 %dir %{_includedir}/%{rawname}/sysdeps/gcc
 %{_includedir}/%{rawname}/sysdeps/gcc/*.h
@@ -73,27 +83,9 @@ details.
 %{_includedir}/%{rawname}/sysdeps/msftc/*.h
 %dir %{_includedir}/%{rawname}/sysdeps/sunc
 %{_includedir}/%{rawname}/sysdeps/sunc/*.h
-%{_libdir}/*.a
+%dir %{_includedir}/%{rawname}/sysdeps/armcc
+%{_includedir}/%{rawname}/sysdeps/armcc/*.h
 %dir %{_datadir}/%{libname}
 %{_datadir}/%{libname}/*
-
-
-%prep
-%setup -q -n %{libname}-%{version}
-%patch1 -p0
-%patch2 -p1
-%patch3 -p1 -b .installonce
-%patch4 -p1
-%patch5 -p1 -b .ppc
-
-%build
-autoreconf
-%configure2_5x
-%make
-
-%install
-rm -rf %{buildroot}
-%makeinstall
-
-%clean
-rm -rf %{buildroot}
+%{_libdir}/pkgconfig/*
+%{_libdir}/*.a
