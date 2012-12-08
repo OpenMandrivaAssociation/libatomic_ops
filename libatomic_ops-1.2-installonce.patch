@@ -1,0 +1,22 @@
+diff -p -up libatomic_ops-1.2/doc/Makefile.am.installonce libatomic_ops-1.2/doc/Makefile.am
+--- libatomic_ops-1.2/doc/Makefile.am.installonce	2005-03-21 23:05:19.000000000 +0100
++++ libatomic_ops-1.2/doc/Makefile.am	2009-09-28 13:18:07.000000000 +0200
+@@ -1,3 +1,3 @@
+ # installed documentation
+ #
+-dist_pkgdata_DATA=COPYING LICENSING.txt README.txt COPYING README_stack.txt README_malloc.txt README_win32.txt
++dist_pkgdata_DATA=COPYING LICENSING.txt README.txt README_stack.txt README_malloc.txt README_win32.txt
+diff -p -up libatomic_ops-1.2/src/atomic_ops/sysdeps/Makefile.am.installonce libatomic_ops-1.2/src/atomic_ops/sysdeps/Makefile.am
+--- libatomic_ops-1.2/src/atomic_ops/sysdeps/Makefile.am.installonce	2005-09-28 01:53:16.000000000 +0200
++++ libatomic_ops-1.2/src/atomic_ops/sysdeps/Makefile.am	2009-09-28 13:10:45.000000000 +0200
+@@ -27,8 +27,8 @@ nobase_sysdep_HEADERS= generic_pthread.h
+ 	  gcc/alpha.h gcc/arm.h gcc/x86.h \
+ 	  gcc/hppa.h gcc/ia64.h \
+ 	  gcc/powerpc.h gcc/sparc.h \
+-	  gcc/hppa.h gcc/m68k.h gcc/mips.h gcc/s390.h \
+-	  gcc/ia64.h gcc/x86_64.h gcc/cris.h \
++	  gcc/m68k.h gcc/mips.h gcc/s390.h \
++	  gcc/x86_64.h gcc/cris.h \
+ 	\
+ 	  icc/ia64.h \
+ 	\

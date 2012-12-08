@@ -1,0 +1,17 @@
+--- libatomic_ops-1.2/src/atomic_ops/sysdeps/gcc/powerpc.h.bak	2006-03-29 00:49:14.000000000 +0200
++++ libatomic_ops-1.2/src/atomic_ops/sysdeps/gcc/powerpc.h	2007-05-27 02:11:34.531353813 +0200
+@@ -72,12 +72,12 @@
+   /* registers.  I always got "impossible constraint" when I	*/
+   /* tried the "y" constraint.					*/
+   __asm__ __volatile__ (
+-    "lwz %0,%1\n"
++    "lwz %0,0(%1)\n"
+     "cmpw cr7,%0,%0\n"
+     "bne- cr7,1f\n"
+     "1: isync\n"
+     : "=r" (result)
+-    : "m"(*addr) : "memory", "cc");
++    : "b"(addr) : "memory", "cc");
+   return result;
+ }
+ 
