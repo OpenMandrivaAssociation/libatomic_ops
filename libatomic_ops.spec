@@ -1,6 +1,7 @@
 #define snapshot_vendor  ivmai
 #define snapshot         81be636
 #define snapshot_version 7_2alpha6-128
+%define debug_package	%nil
 
 %define rawname atomic_ops
 # Can't use mklibname as the name should be the same on all arches
