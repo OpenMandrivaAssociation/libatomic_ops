@@ -18,6 +18,7 @@ License:   MIT/GPL
 Group:     System/Libraries
 Source0:   http://www.hpl.hp.com/personal/Hans_Boehm/gc/gc_source/%{name}-%{version}%{prever}.tar.gz
 URL:       http://www.hpl.hp.com/research/linux/atomic_ops/
+Patch0:    libatomic_ops-automake-1.13.patch
 
 %description
 Multiplatform atomic memory operation library
@@ -56,6 +57,7 @@ details.
 %prep
 #setup -q -n % {snapshot_vendor}-% {name}-% {snapshot}
 %setup -q -n %{name}-%{version}%{prever}
+%apply_patches
 
 %build
 autoreconf -fi
