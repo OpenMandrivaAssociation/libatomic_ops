@@ -1,5 +1,5 @@
 %define _disable_ld_no_undefined 1
-%define debug_package	%nil
+#define debug_package	%nil
 
 %define sname	atomic_ops
 %define prever	alpha2
@@ -12,7 +12,7 @@ Summary:	Multiplatform atomic memory operation library
 Name:		libatomic_ops
 Version:	7.3
 Release:	0.%{prever}.1
-License:	MIT/GPLv2
+License:	GPLv2
 Group:		System/Libraries
 Url:		http://www.hpl.hp.com/research/linux/atomic_ops/
 Source0:	http://www.hpl.hp.com/personal/Hans_Boehm/gc/gc_source/%{name}-%{version}%{prever}.tar.gz
@@ -36,7 +36,7 @@ Group:		System/Libraries
 This package contains the shared library for %{name}.
 
 %package -n %{devname}
-Summary:   Multiplatform atomic memory operation library
+Summary:	Multiplatform atomic memory operation library
 Group:		System/Libraries
 Provides:	%{name}-devel = %{version}
 Requires:	%{libname} = %{version}-%{release}
@@ -54,6 +54,7 @@ afford to use the standard locking primitives, or for code that has to access
 shared data structures from signal handlers. For details, see README.txt in
 the distribution.
 
+%prep
 %setup -qn %{name}-%{version}%{prever}
 %apply_patches
 
