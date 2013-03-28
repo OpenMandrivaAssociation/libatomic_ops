@@ -1,8 +1,9 @@
 %define _disable_ld_no_undefined 1
 #define debug_package	%nil
 
+%define	gitdate	28032013
 %define sname	atomic_ops
-%define prever	alpha2
+%define prever	alpha3
 %define major	1
 %define libname	%mklibname %{sname} %{major} 
 %define libgpl	%mklibname %{sname}_gpl %{major} 
@@ -15,7 +16,8 @@ Release:	0.%{prever}.1
 License:	GPLv2
 Group:		System/Libraries
 Url:		http://www.hpl.hp.com/research/linux/atomic_ops/
-Source0:	http://www.hpl.hp.com/personal/Hans_Boehm/gc/gc_source/%{name}-%{version}%{prever}.tar.gz
+#Source0:	http://www.hpl.hp.com/personal/Hans_Boehm/gc/gc_source/%{name}-%{version}%{prever}.tar.gz
+Source0:	libatomic_ops-7.3alpha3-28032013.tar.bz2
 Patch0:		libatomic_ops-automake-1.13.patch
 
 %description
@@ -55,7 +57,7 @@ shared data structures from signal handlers. For details, see README.txt in
 the distribution.
 
 %prep
-%setup -qn %{name}-%{version}%{prever}
+%setup -qn %{name}-%{version}%{prever}-%{gitdate}
 %apply_patches
 
 %build
@@ -94,6 +96,8 @@ autoreconf -fi
 %{_includedir}/%{sname}/sysdeps/sunc/*.h
 %dir %{_includedir}/%{sname}/sysdeps/armcc
 %{_includedir}/%{sname}/sysdeps/armcc/*.h
+%dir %{_includedir}/%{sname}/sysdeps/loadstore
+%{_includedir}/%{sname}/sysdeps/loadstore/*.h
 %dir %{_datadir}/%{name}
 %{_datadir}/%{name}/*
 %{_libdir}/pkgconfig/*
