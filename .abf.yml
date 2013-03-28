@@ -1,4 +1,5 @@
 sources:
-  "libatomic_ops-1.2.tar.gz": 8bf4134d614acb1a6234b3102e67a847ae9369b0
-  "libatomic_ops-7.3alpha2.tar.bz2": 9bd3bc4364d8e9f357293208e6f43cd2c6bc20f5
-  "libatomic_ops-7.3alpha2.tar.gz": 71650dc87c873e967cdd18767103cb23c8f1042f
+  libatomic_ops-1.2.tar.gz: 8bf4134d614acb1a6234b3102e67a847ae9369b0
+  libatomic_ops-7.3alpha2.tar.bz2: 9bd3bc4364d8e9f357293208e6f43cd2c6bc20f5
+  libatomic_ops-7.3alpha2.tar.gz: 71650dc87c873e967cdd18767103cb23c8f1042f
+  libatomic_ops-7.3alpha3-28032013.tar.bz2: fff63191ed25b48b2ee5132d013281171a674d00
