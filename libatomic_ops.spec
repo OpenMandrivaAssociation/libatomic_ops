@@ -1,9 +1,7 @@
 %define _disable_ld_no_undefined 1
 #define debug_package	%nil
 
-%define	gitdate	28032013
 %define sname	atomic_ops
-%define prever	alpha3
 %define major	1
 %define libname	%mklibname %{sname} %{major} 
 %define libgpl	%mklibname %{sname}_gpl %{major} 
@@ -11,14 +9,12 @@
 
 Summary:	Multiplatform atomic memory operation library
 Name:		libatomic_ops
-Version:	7.3
-Release:	0.%{prever}.1
+Version:	7.4.0
+Release:	1
 License:	GPLv2
 Group:		System/Libraries
 Url:		http://www.hpl.hp.com/research/linux/atomic_ops/
-#Source0:	http://www.hpl.hp.com/personal/Hans_Boehm/gc/gc_source/%{name}-%{version}%{prever}.tar.gz
-Source0:	libatomic_ops-7.3alpha3-28032013.tar.bz2
-Patch0:		libatomic_ops-automake-1.13.patch
+Source0:	http://www.hpl.hp.com/personal/Hans_Boehm/gc/gc_source/%{name}-%{version}.tar.gz
 
 %description
 Multiplatform atomic memory operation library
@@ -57,7 +53,7 @@ shared data structures from signal handlers. For details, see README.txt in
 the distribution.
 
 %prep
-%setup -qn %{name}-%{version}%{prever}-%{gitdate}
+%setup -qn %{name}-%{version}
 %apply_patches
 
 %build
