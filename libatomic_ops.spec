@@ -10,7 +10,7 @@
 Summary:	Multiplatform atomic memory operation library
 Name:		libatomic_ops
 Version:	7.4.0
-Release:	2
+Release:	3
 License:	GPLv2
 Group:		System/Libraries
 Url:		http://www.hpl.hp.com/research/linux/atomic_ops/
