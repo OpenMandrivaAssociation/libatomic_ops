@@ -1,15 +1,15 @@
 %define _disable_ld_no_undefined 1
 #define debug_package	%nil
 
-%define sname	atomic_ops
-%define major	1
-%define libname	%mklibname %{sname} %{major} 
-%define libgpl	%mklibname %{sname}_gpl %{major} 
+%define sname atomic_ops
+%define major 1
+%define libname %mklibname %{sname} %{major} 
+%define libgpl %mklibname %{sname}_gpl %{major} 
 %define devname %mklibname -d %{sname}
 
 Summary:	Multiplatform atomic memory operation library
 Name:		libatomic_ops
-Version:	7.4.2
+Version:	7.4.4
 Release:	1
 License:	GPLv2
 Group:		System/Libraries
@@ -58,7 +58,7 @@ the distribution.
 
 %build
 autoreconf -fi
-%configure2_5x \
+%configure \
 	--disable-static \
 	--enable-shared
 %make
@@ -98,4 +98,3 @@ autoreconf -fi
 %{_datadir}/%{name}/*
 %{_libdir}/pkgconfig/*
 %{_libdir}/*.so
-
