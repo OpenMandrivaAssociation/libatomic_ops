@@ -9,15 +9,15 @@
 
 Summary:	Multiplatform atomic memory operation library
 Name:		libatomic_ops
-Version:	7.4.4
+Version:	7.4.8
 Release:	1
 License:	GPLv2
 Group:		System/Libraries
 Url:		http://www.hboehm.info/gc/
-Source0:	http://www.ivmaisoft.com/_bin/atomic_ops/%{name}-%{version}.tar.gz
+Source0:	https://github.com/ivmai/libatomic_ops/releases/download/v%{version}/%{name}-%{version}.tar.gz
 
 %description
-Multiplatform atomic memory operation library
+Multiplatform atomic memory operation library.
 
 %package -n %{libname}
 Summary:	Shared library for %{name}
@@ -66,6 +66,8 @@ autoreconf -fi
 %install
 %makeinstall_std
 
+rm -rf %{buildroot}%{_docdir}/%{name}
+
 %files -n %{libname}
 %{_libdir}/libatomic_ops.so.%{major}*
 
@@ -73,6 +75,7 @@ autoreconf -fi
 %{_libdir}/libatomic_ops_gpl.so.%{major}*
 
 %files -n  %{devname}
+%doc COPYING README.md
 %{_includedir}/*.h
 %dir %{_includedir}/%{sname}
 %{_includedir}/%{sname}/*.h
@@ -94,7 +97,5 @@ autoreconf -fi
 %{_includedir}/%{sname}/sysdeps/armcc/*.h
 %dir %{_includedir}/%{sname}/sysdeps/loadstore
 %{_includedir}/%{sname}/sysdeps/loadstore/*.h
-%dir %{_datadir}/%{name}
-%{_datadir}/%{name}/*
 %{_libdir}/pkgconfig/*
 %{_libdir}/*.so
