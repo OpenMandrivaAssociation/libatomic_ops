@@ -9,15 +9,15 @@
 
 Summary:	Multiplatform atomic memory operation library
 Name:		libatomic_ops
-Version:	7.4.4
+Version:	7.4.8
 Release:	1
 License:	GPLv2
 Group:		System/Libraries
 Url:		http://www.hboehm.info/gc/
-Source0:	http://www.ivmaisoft.com/_bin/atomic_ops/%{name}-%{version}.tar.gz
+Source0:	https://github.com/ivmai/libatomic_ops/releases/download/v%{version}/%{name}-%{version}.tar.gz
 
 %description
-Multiplatform atomic memory operation library
+Multiplatform atomic memory operation library.
 
 %package -n %{libname}
 Summary:	Shared library for %{name}
