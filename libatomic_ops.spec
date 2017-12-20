@@ -66,6 +66,8 @@ autoreconf -fi
 %install
 %makeinstall_std
 
+rm -rf %{buildroot}%{docdir}/%{name}
+
 %files -n %{libname}
 %{_libdir}/libatomic_ops.so.%{major}*
 
@@ -73,6 +75,7 @@ autoreconf -fi
 %{_libdir}/libatomic_ops_gpl.so.%{major}*
 
 %files -n  %{devname}
+%doc COPYING LICENSING.txt README.md
 %{_includedir}/*.h
 %dir %{_includedir}/%{sname}
 %{_includedir}/%{sname}/*.h
@@ -95,6 +98,5 @@ autoreconf -fi
 %dir %{_includedir}/%{sname}/sysdeps/loadstore
 %{_includedir}/%{sname}/sysdeps/loadstore/*.h
 %dir %{_datadir}/%{name}
-%{_datadir}/%{name}/*
 %{_libdir}/pkgconfig/*
 %{_libdir}/*.so
