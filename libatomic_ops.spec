@@ -9,7 +9,7 @@
 
 Summary:	Multiplatform atomic memory operation library
 Name:		libatomic_ops
-Version:	7.4.8
+Version:	7.4.10
 Release:	1
 License:	GPLv2
 Group:		System/Libraries
