@@ -10,7 +10,7 @@
 Summary:	Multiplatform atomic memory operation library
 Name:		libatomic_ops
 Version:	7.6.6
-Release:	1
+Release:	2
 License:	GPLv2
 Group:		System/Libraries
 Url:		http://www.hboehm.info/gc/
