@@ -1,3 +1,10 @@
+# libatomic_ops is used by libdrm, libdrm is used by wine and steam
+%ifarch %{x86_64}
+%bcond_without compat32
+%else
+%bcond_with compat32
+%endif
+
 %define _disable_ld_no_undefined 1
 #define debug_package %nil
 
@@ -6,11 +13,14 @@
 %define libname %mklibname %{sname} %{major}
 %define libgpl %mklibname %{sname}_gpl %{major}
 %define devname %mklibname -d %{sname}
+%define lib32name lib%{sname}%{major}
+%define lib32gpl lib%{sname}_gpl%{major}
+%define dev32name lib%{sname}-devel
 
 Summary:	Multiplatform atomic memory operation library
 Name:		libatomic_ops
 Version:	7.6.10
-Release:	1
+Release:	2
 License:	GPLv2
 Group:		System/Libraries
 Url:		http://www.hboehm.info/gc/
@@ -36,7 +46,6 @@ This package contains the shared library for %{name}.
 %package -n %{devname}
 Summary:	Multiplatform atomic memory operation library
 Group:		System/Libraries
-Provides:	%{name}-devel = %{version}
 Requires:	%{libname} = %{version}-%{release}
 Requires:	%{libgpl} = %{version}-%{release}
 
@@ -52,20 +61,69 @@ afford to use the standard locking primitives, or for code that has to access
 shared data structures from signal handlers. For details, see README.txt in
 the distribution.
 
+%if %{with compat32}
+%package -n %{lib32name}
+Summary:	Shared library for %{name} (32-bit)
+Group:		System/Libraries
+
+%description -n %{lib32name}
+This package contains the shared library for %{name}.
+
+%package -n %{lib32gpl}
+Summary:	Shared library for %{name} (32-bit)
+Group:		System/Libraries
+
+%description -n %{lib32gpl}
+This package contains the shared library for %{name}.
+
+%package -n %{dev32name}
+Summary:	Multiplatform atomic memory operation library (32-bit)
+Group:		System/Libraries
+Provides:	%{name}-devel = %{version}
+Requires:	%{devname} = %{version}-%{release}
+Requires:	%{lib32name} = %{version}-%{release}
+Requires:	%{lib32gpl} = %{version}-%{release}
+
+%description -n  %{dev32name}
+Provides implementations for atomic memory update operations on a number of
+architectures. This allows direct use of these in reasonably portable code.
+Unlike earlier similar packages, this one explicitly considers memory barrier
+semantics, and allows the construction of code that involves minimum overhead
+across a variety of architectures.
+
+It should be useful both for high performance multi-threaded code which can't
+afford to use the standard locking primitives, or for code that has to access
+shared data structures from signal handlers. For details, see README.txt in
+the distribution.
+%endif
+
 %prep
-%setup -qn %{name}-%{version}
-%autopatch -p1
+%autosetup -p1
+export CONFIGURE_TOP="$(pwd)"
+autoreconf -fi
+
+%if %{with compat32}
+mkdir build32
+cd build32
+%configure32 --enable-shared
+cd ..
+%endif
+
+mkdir build
+cd build
+%configure --enable-shared
 
 %build
-autoreconf -fi
-%configure \
-	--disable-static \
-	--enable-shared
-
-%make_build
+%if %{with compat32}
+%make_build -C build32
+%endif
+%make_build -C build
 
 %install
-%make_install
+%if %{with compat32}
+%make_install -C build32
+%endif
+%make_install -C build
 
 rm -rf %{buildroot}%{_docdir}/%{name}
 
@@ -100,3 +158,15 @@ rm -rf %{buildroot}%{_docdir}/%{name}
 %{_includedir}/%{sname}/sysdeps/loadstore/*.h
 %{_libdir}/pkgconfig/*
 %{_libdir}/*.so
+
+%if %{with compat32}
+%files -n %{lib32name}
+%{_prefix}/lib/libatomic_ops.so.%{major}*
+
+%files -n %{lib32gpl}
+%{_prefix}/lib/libatomic_ops_gpl.so.%{major}*
+
+%files -n  %{dev32name}
+%{_prefix}/lib/*.so
+%{_prefix}/lib/pkgconfig/*
+%endif
