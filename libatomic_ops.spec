@@ -25,6 +25,9 @@ License:	GPLv2
 Group:		System/Libraries
 Url:		http://www.hboehm.info/gc/
 Source0:	https://github.com/ivmai/libatomic_ops/releases/download/v%{version}/%{name}-%{version}.tar.gz
+%if %{with compat32}
+BuildRequires:	libc6
+%endif
 
 %description
 Multiplatform atomic memory operation library.
