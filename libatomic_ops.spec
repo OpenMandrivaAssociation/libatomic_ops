@@ -19,11 +19,11 @@
 
 Summary:	Multiplatform atomic memory operation library
 Name:		libatomic_ops
-Version:	7.6.14
+Version:	7.8.0
 Release:	1
 License:	GPLv2
 Group:		System/Libraries
-Url:		http://www.hboehm.info/gc/
+Url:		https://github.com/ivmai/libatomic_ops
 Source0:	https://github.com/ivmai/libatomic_ops/releases/download/v%{version}/%{name}-%{version}.tar.gz
 %if %{with compat32}
 BuildRequires:	libc6
@@ -61,7 +61,7 @@ across a variety of architectures.
 
 It should be useful both for high performance multi-threaded code which can't
 afford to use the standard locking primitives, or for code that has to access
-shared data structures from signal handlers. For details, see README.txt in
+shared data structures from signal handlers. For details, see README.md in
 the distribution.
 
 %if %{with compat32}
@@ -96,7 +96,7 @@ across a variety of architectures.
 
 It should be useful both for high performance multi-threaded code which can't
 afford to use the standard locking primitives, or for code that has to access
-shared data structures from signal handlers. For details, see README.txt in
+shared data structures from signal handlers. For details, see README.md in
 the distribution.
 %endif
 
@@ -137,7 +137,7 @@ rm -rf %{buildroot}%{_docdir}/%{name}
 %{_libdir}/libatomic_ops_gpl.so.%{major}*
 
 %files -n  %{devname}
-%doc COPYING README.md
+%doc COPYING LICENSE README.md
 %{_includedir}/*.h
 %dir %{_includedir}/%{sname}
 %{_includedir}/%{sname}/*.h
