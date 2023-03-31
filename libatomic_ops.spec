@@ -19,7 +19,7 @@
 Summary:	Multiplatform atomic memory operation library
 Name:		libatomic_ops
 Version:	7.8.0
-Release:	1
+Release:	2
 License:	GPLv2
 Group:		System/Libraries
 Url:		https://github.com/ivmai/libatomic_ops
