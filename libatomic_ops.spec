@@ -6,7 +6,6 @@
 %endif
 
 %define _disable_ld_no_undefined 1
-#define debug_package %nil
 
 %define sname atomic_ops
 %define major 1
@@ -25,6 +24,8 @@ License:	GPLv2
 Group:		System/Libraries
 Url:		https://github.com/ivmai/libatomic_ops
 Source0:	https://github.com/ivmai/libatomic_ops/releases/download/v%{version}/%{name}-%{version}.tar.gz
+BuildRequires:	cmake
+BuildRequires:	ninja
 %if %{with compat32}
 BuildRequires:	libc6
 %endif
@@ -102,31 +103,30 @@ the distribution.
 
 %prep
 %autosetup -p1
-export CONFIGURE_TOP="$(pwd)"
-autoreconf -fi
-
-%if %{with compat32}
-mkdir build32
-cd build32
-%configure32 --enable-shared
-cd ..
-%endif
-
-mkdir build
-cd build
-%configure --enable-shared
 
 %build
 %if %{with compat32}
-%make_build -C build32
+%cmake32 \
+	-DBUILD_SHARED_LIBS=ON \
+	-Denable_atomic_intrinsics=OFF \
+	-G Ninja
+
+%ninja_build
+cd ..
 %endif
-%make_build -C build
+
+%cmake \
+	-DBUILD_SHARED_LIBS=ON \
+	-Denable_atomic_intrinsics=OFF \
+	-G Ninja
+
+%ninja_build
 
 %install
 %if %{with compat32}
-%make_install -C build32
+%ninja_install -C build32
 %endif
-%make_install -C build
+%ninja_install -C build
 
 rm -rf %{buildroot}%{_docdir}/%{name}
 
@@ -161,6 +161,8 @@ rm -rf %{buildroot}%{_docdir}/%{name}
 %{_includedir}/%{sname}/sysdeps/loadstore/*.h
 %{_libdir}/pkgconfig/*
 %{_libdir}/*.so
+%dir %{_libdir}/cmake/%{sname}
+%{_libdir}/cmake/%{sname}/*.cmake
 
 %if %{with compat32}
 %files -n %{lib32name}
@@ -172,4 +174,6 @@ rm -rf %{buildroot}%{_docdir}/%{name}
 %files -n  %{dev32name}
 %{_prefix}/lib/*.so
 %{_prefix}/lib/pkgconfig/*
+%dir %{_prefix}/lib/cmake/%{sname}
+%{_prefix}/lib/cmake/%{sname}/*.cmake
 %endif
