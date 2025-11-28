@@ -18,12 +18,12 @@
 
 Summary:	Multiplatform atomic memory operation library
 Name:		libatomic_ops
-Version:	7.8.2
+Version:	7.10.0
 Release:	1
 License:	GPLv2
 Group:		System/Libraries
-Url:		https://github.com/ivmai/libatomic_ops
-Source0:	https://github.com/ivmai/libatomic_ops/releases/download/v%{version}/%{name}-%{version}.tar.gz
+Url:		https://github.com/bdwgc/libatomic_ops
+Source0:	https://github.com/bdwgc/libatomic_ops/releases/download/v%{version}/%{name}-%{version}.tar.gz
 BuildRequires:	cmake
 BuildRequires:	ninja
 %if %{with compat32}
@@ -107,7 +107,7 @@ the distribution.
 %build
 %if %{with compat32}
 %cmake32 \
-	-DBUILD_SHARED_LIBS=ON \
+	-DAO_BUILD_SHARED_LIBS=ON \
 	-Denable_atomic_intrinsics=OFF \
 	-G Ninja
 
@@ -116,7 +116,7 @@ cd ..
 %endif
 
 %cmake \
-	-DBUILD_SHARED_LIBS=ON \
+	-DAO_BUILD_SHARED_LIBS=ON \
 	-Denable_atomic_intrinsics=OFF \
 	-G Ninja
 
